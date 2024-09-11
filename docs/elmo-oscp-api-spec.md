@@ -1,11 +1,10 @@
 ---
-layout: page
+layout: default
 title: ELMO OSCP API Specification
 permalink: /elmo-oscp-api-spec/
 ---
-# ELMO OSCP API Specification
 
-此文件描述如何透過 OSCP API 與 ELMO 進行各種溝通流程，包含 Register、Handshake、日前型協商及緊急通知等流程。
+此文件描述 CSMS 如何透過 OSCP API 與 ELMO 進行各種溝通流程，包含 Register、Handshake、日前型協商及緊急通知等流程。
 
 ## ELMO OSCP 測試環境
 
@@ -80,8 +79,10 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 參見 OSCP 2.0 Specification – 4.1.2. HTTP Requests
 
-| `Authorization`    | `<AUTH_TOKEN>` |
-| `X-Request-ID`     | (Unique request ID of this message.) |
+| HTTP Header        | Purpose                                                         |
+|:-------------------|:----------------------------------------------------------------|
+| `Authorization`    | ELMO authorization token. (`<AUTH_TOKEN>`)                      |
+| `X-Request-ID`     | (Unique request ID of this message.)                            |
 | `X-Correlation-ID` | (Reference to a request ID that this message is a response to.) |
 
 ### Register
