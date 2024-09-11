@@ -1,7 +1,3 @@
-layout: page
-title: "ELMO OSCP API Specification"
-permalink: /elmo-oscp-api-spec/
-
 # ELMO OSCP API Specification
 
 此文件描述如何透過 OSCP API 與 ELMO 進行各種溝通流程，包含 Register、Handshake、日前型協商及緊急通知等流程。
