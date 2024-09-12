@@ -1,7 +1,19 @@
 ---
-layout: default
 title: ELMO OSCP API Specification
-permalink: /elmo-oscp-api-spec/
+
+language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
+  - json
+
+toc_footers:
+  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+
+search: true
+
+code_clipboard: true
+
+meta:
+  - name: description
+    content: ELMO OSCP API Specification
 ---
 
 此文件描述 CSMS 如何透過 OSCP API 與 ELMO 進行各種溝通流程，包含 Register、Handshake、日前型協商及緊急通知等流程。
