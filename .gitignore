@@ -1,8 +1,27 @@
-_site
+*.gem
+*.rbc
+.bundle
+.config
+coverage
+InstalledFiles
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
+*.DS_STORE
+build/
+.cache
+.vagrant
 .sass-cache
-.jekyll-cache
-.jekyll-metadata
-Gemfile.lock
-vendor
 
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
 .idea/
+
+# Vagrant artifacts
+ubuntu-*-console.log
