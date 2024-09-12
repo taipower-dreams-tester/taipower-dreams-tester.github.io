@@ -89,14 +89,14 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 #### CSMS 向 ELMO 發送註冊請求
 
-| Endpoint    | `<OSCP_PREFIX>/register` |
-| HTTP Method | `POST` |
+| **Endpoint**    | `<OSCP_PREFIX>/register` |
+| **HTTP Method** | `POST` |
 
-**Message**
+##### Message
 
 參見 OSCP 2.0 Specification – 4.3.1.1. Register
 
-**Message Example**
+##### Message Example
 
 ```json
 {
@@ -104,7 +104,7 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
   "version_url": [
     {
       "version": "2.0",
-      "base_url": "https://csms-url/oscp/2.0"
+      "base_url": "https://csms-base-url/oscp/fp/2.0"
     }
   ]
 }
@@ -114,17 +114,26 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 手動觸發 callback register
 
-| Endpoint    | `<CALLBACK_PREFIX>/register` |
-| HTTP Method | `POST` |
+| **Endpoint**    | `<CALLBACK_PREFIX>/register` |
+| **HTTP Method** | `POST` |
 
 
-**Message**
+##### Message
+
+| Field Name             | Field Type | Description                 |
+|:-----------------------|:-----------|:----------------------------|
+| `callback_url`         | string     | CSMS 接收 OSCP Register 的 URL |
+| `header.authorization` | string     | CSMS 接收 OSCP 的 token        |
 
 
-**Message Example**
+##### Message Example
 
 ```json
 {
+  "callback_url": "https://csms-base-url/oscp/fp/2.0/register",
+  "header": {
+    "authorization": "CSMS-TOKEN"
+  }
 }
 ```
 
@@ -134,29 +143,37 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 手動觸發 callback register
 
-| Endpoint    | `<CALLBACK_PREFIX>/handshake` |
-| HTTP Method | `POST` |
+| **Endpoint**    | `<CALLBACK_PREFIX>/handshake` |
+| **HTTP Method** | `POST` |
 
-**Message**
+##### Message
 
+| Field Name             | Field Type | Description                 |
+|:-----------------------|:-----------|:----------------------------|
+| `callback_url`         | string     | CSMS 接收 OSCP Handshake 的 URL |
+| `header.authorization` | string     | CSMS 接收 OSCP 的 token        |
 
-**Message Example**
+##### Message Example
 
 ```json
 {
+  "callback_url": "https://csms-base-url/oscp/fp/2.0/handshake",
+  "header": {
+    "authorization": "CSMS-TOKEN"
+  }
 }
 ```
 
 #### CSMS 回應 Handshake Acknowledge
 
-| Endpoint    | `<OSCP_PREFIX>/handshake_acknowledge` |
-| HTTP Method | `POST` |
+| **Endpoint**    | `<OSCP_PREFIX>/handshake_acknowledge` |
+| **HTTP Method** | `POST` |
 
-**Message**
+##### Message
 
 參見 OSCP 2.0 Specification – 4.3.3. HandshakeAcknowledge
 
-**Message Example**
+##### Message Example
 
 ```json
 {}
@@ -166,13 +183,20 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 #### 模擬 ELMO 發送指定容量通知
 
-| Endpoint    | `<CALLBACK_PREFIX>/update_group_capacity_forecast` |
-| HTTP Method | `POST` |
+| **Endpoint**    | `<CALLBACK_PREFIX>/update_group_capacity_forecast` |
+| **HTTP Method** | `POST` |
 
-**Message**
+##### Message
 
+| Field Name             | Field Type | Description                                    |
+|:-----------------------|:-----------|:-----------------------------------------------|
+| `callback_url`         | string     | CSMS 接收 OSCP UpdateGroupCapacityForecast 的 URL |
+| `header.authorization` | string     | CSMS 接收 OSCP 的 token                           |
+| `purpose`              | string     | 帶入 `negotiation_assign_capacity`               |
+| `group_id`             | string     | ELMO 提供的充電站 ID                                 |
+| `capacity`             | number     | 指定可用容量 (kW)                                    |
 
-**Message Example**
+##### Message Example
 
 ```json
 {
@@ -188,14 +212,14 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 #### CSMS 發送額外可用容量申請
 
-| Endpoint    | `<OSCP_PREFIX>/adjust_group_capacity_forecast` |
-| HTTP Method | `POST` |
+| **Endpoint**    | `<OSCP_PREFIX>/adjust_group_capacity_forecast` |
+| **HTTP Method** | `POST` |
 
-**Message**
+##### Message
 
 參見 OSCP 2.0 Specification – 4.4.2. AdjustGroupCapacityForecast
 
-**Message Example**
+##### Message Example
 
 ```json
 {
@@ -204,13 +228,20 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 #### 模擬 ELMO 回覆額外可用容量
 
-| Endpoint    | `<CALLBACK_PREFIX>/update_group_capacity_forecast` |
-| HTTP Method | `POST` |
+| **Endpoint**    | `<CALLBACK_PREFIX>/update_group_capacity_forecast` |
+| **HTTP Method** | `POST` |
 
-**Message**
+##### Message
 
+| Field Name             | Field Type | Description                                        |
+|:-----------------------|:-----------|:---------------------------------------------------|
+| `callback_url`         | string     | CSMS 接收 OSCP UpdateGroupCapacityForecast 的 URL     |
+| `header.authorization` | string     | CSMS 接收 OSCP 的 token                               |
+| `purpose`              | string     | 帶入 `negotiation_reply_request_additional_capacity` |
+| `group_id`             | string     | ELMO 提供的充電站 ID                                     |
+| `capacity`             | number     | 指定可用容量 (kW)                                        |
 
-**Message Example**
+##### Message Example
 
 ```json
 {
@@ -228,13 +259,20 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 #### 模擬 ELMO 發送緊急通知
 
-| Endpoint    | `<CALLBACK_PREFIX>/update_group_capacity_forecast` |
-| HTTP Method | `POST` |
+| **Endpoint**    | `<CALLBACK_PREFIX>/update_group_capacity_forecast` |
+| **HTTP Method** | `POST` |
 
-**Message**
+##### Message
 
+| Field Name             | Field Type | Description                                    |
+|:-----------------------|:-----------|:-----------------------------------------------|
+| `callback_url`         | string     | CSMS 接收 OSCP UpdateGroupCapacityForecast 的 URL |
+| `header.authorization` | string     | CSMS 接收 OSCP 的 token                           |
+| `purpose`              | string     | 帶入 `emergency_assign_capacity`                 |
+| `group_id`             | string     | ELMO 提供的充電站 ID                                 |
+| `capacity`             | number     | 指定可用容量 (kW)                                    |
 
-**Message Example**
+##### Message Example
 
 ```json
 {
@@ -244,7 +282,7 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
   },
   "purpose": "emergency_assign_capacity",
   "group_id": "CHARGING_STATION_ID",
-  "capacity": 150
+  "capacity": 50
 }
 ```
 
@@ -252,21 +290,21 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 #### CSMS 發送累積用電量更新
 
-| Endpoint    | `<OSCP_PREFIX>/update_group_measurements` |
-| HTTP Method | `POST` |
+| **Endpoint**    | `<OSCP_PREFIX>/update_group_measurements` |
+| **HTTP Method** | `POST` |
 
-**Message**
+##### Message
 
 參見 OSCP 2.0 Specification – 4.5.1. UpdateGroupMeasurements
 
-**Message Example**
+##### Message Example
 
 ```json
 {
   "group_id": "CSMS-GROUP-ID",
   "measurements": [
     {
-      "value": 123.4,
+      "value": 123.456,
       "phase": "ALL",
       "unit": "KWH",
       "direction": "IMPORT",
