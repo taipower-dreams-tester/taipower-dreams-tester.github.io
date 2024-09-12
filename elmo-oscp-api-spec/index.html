@@ -1,0 +1,1197 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta
+            name="description"
+            content="ELMO OSCP API Specification"
+        >
+    <title>ELMO OSCP API Specification</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sa {
+  color: #6c71c4;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="../stylesheets/screen-9c19b03a.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print-966d6edc.css" rel="stylesheet" media="print" />
+      <script src="../javascripts/all-024da600.js"></script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
+  </head>
+
+  <body class="elmo-oscp-api-spec elmo-oscp-api-spec_index" data-languages="[&quot;json&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="../images/logo-3fe96920.png" class="logo" alt="" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="json">json</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#elmo-oscp-api-specification" class="toc-h1 toc-link" data-title="ELMO OSCP API Specification">ELMO OSCP API Specification</a>
+          </li>
+          <li>
+            <a href="#elmo-oscp" class="toc-h1 toc-link" data-title="ELMO OSCP 測試環境">ELMO OSCP 測試環境</a>
+          </li>
+          <li>
+            <a href="#09d316b965" class="toc-h1 toc-link" data-title="流程">流程</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#register" class="toc-h2 toc-link" data-title="Register">Register</a>
+                  </li>
+                  <li>
+                    <a href="#handshake" class="toc-h2 toc-link" data-title="Handshake">Handshake</a>
+                  </li>
+                  <li>
+                    <a href="#a1e9a37f24" class="toc-h2 toc-link" data-title="日前型協商">日前型協商</a>
+                  </li>
+                  <li>
+                    <a href="#7513deaf2b" class="toc-h2 toc-link" data-title="緊急通知">緊急通知</a>
+                  </li>
+                  <li>
+                    <a href="#4ed4c1802d" class="toc-h2 toc-link" data-title="回報累積用電量">回報累積用電量</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#messages-general" class="toc-h1 toc-link" data-title="Messages - General">Messages - General</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#http-requests" class="toc-h2 toc-link" data-title="HTTP Requests">HTTP Requests</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#messages-register" class="toc-h1 toc-link" data-title="Messages - Register">Messages - Register</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#csms-elmo" class="toc-h2 toc-link" data-title="CSMS 向 ELMO 發送註冊請求">CSMS 向 ELMO 發送註冊請求</a>
+                  </li>
+                  <li>
+                    <a href="#elmo" class="toc-h2 toc-link" data-title="模擬 ELMO 發送註冊回應">模擬 ELMO 發送註冊回應</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#messages-handshake" class="toc-h1 toc-link" data-title="Messages - Handshake">Messages - Handshake</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#elmo-handshake" class="toc-h2 toc-link" data-title="模擬 ELMO 發送 Handshake 請求">模擬 ELMO 發送 Handshake 請求</a>
+                  </li>
+                  <li>
+                    <a href="#csms-handshake-acknowledge" class="toc-h2 toc-link" data-title="CSMS 回應 Handshake Acknowledge">CSMS 回應 Handshake Acknowledge</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#messages" class="toc-h1 toc-link" data-title="Messages - 日前型協商">Messages - 日前型協商</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#elmo-2" class="toc-h2 toc-link" data-title="模擬 ELMO 發送指定容量通知">模擬 ELMO 發送指定容量通知</a>
+                  </li>
+                  <li>
+                    <a href="#csms" class="toc-h2 toc-link" data-title="CSMS 發送額外可用容量申請">CSMS 發送額外可用容量申請</a>
+                  </li>
+                  <li>
+                    <a href="#elmo-3" class="toc-h2 toc-link" data-title="模擬 ELMO 回覆額外可用容量">模擬 ELMO 回覆額外可用容量</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#messages-2" class="toc-h1 toc-link" data-title="Messages - 緊急通知">Messages - 緊急通知</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#elmo-4" class="toc-h2 toc-link" data-title="模擬 ELMO 發送緊急通知">模擬 ELMO 發送緊急通知</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#messages-3" class="toc-h1 toc-link" data-title="Messages - 回報累積用電量">Messages - 回報累積用電量</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#csms-2" class="toc-h2 toc-link" data-title="CSMS 發送累積用電量更新">CSMS 發送累積用電量更新</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='elmo-oscp-api-specification'>ELMO OSCP API Specification</h1>
+<p>此文件描述 CSMS 如何透過 OSCP API 與 ELMO 進行各種溝通流程，包含 Register、Handshake、日前型協商及緊急通知等流程。</p>
+<h1 id='elmo-oscp'>ELMO OSCP 測試環境</h1>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>ELMO 測試環境 Base URL</strong></td>
+<td style="text-align: left"><code>https://elmo-oscp-testbed.plato-io.com</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong><code>&lt;OSCP_PREFIX&gt;</code></strong></td>
+<td style="text-align: left"><code>/oscp/2.0</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong><code>&lt;CALLBACK_PREFIX&gt;</code></strong></td>
+<td style="text-align: left"><code>/trigger-callback/2.0</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>ELMO Authorization Token</strong></td>
+<td style="text-align: left"><code>&lt;ELMO-AUTH-TOKEN&gt;</code></td>
+</tr>
+</tbody></table>
+<h1 id='09d316b965'>流程</h1><h2 id='register'>Register</h2>
+<p>Register 流程用於 CSMS 初次註冊並取得 ELMO OSCP API 的使用權限。</p>
+
+<table><thead>
+<tr>
+<th></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td style="text-align: left"><strong>取得 Initial Token</strong></td>
+<td style="text-align: left">向 ELMO 管理員取得 initial token。</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: left"><strong>CSMS 向 ELMO 發送註冊請求</strong></td>
+<td style="text-align: left">CSMS 發送 <code>register</code> 請求到 ELMO，進行註冊。</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: left"><strong>模擬 ELMO 發送註冊回應</strong></td>
+<td style="text-align: left">(測試環境 Only)<br>手動觸發測試平台的 <code>register callback</code>，模擬 ELMO 回應。</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align: left"><strong>CSMS 接收註冊回應</strong></td>
+<td style="text-align: left">CSMS 會接收到來自 ELMO 的 <code>register</code> 回應，表示註冊成功。</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align: left"><strong>儲存 ELMO Token</strong></td>
+<td style="text-align: left">註冊成功後，CSMS 需儲存向 ELMO 認證用的 token。</td>
+</tr>
+</tbody></table>
+<h2 id='handshake'>Handshake</h2>
+<p>Handshake 流程用於建立 CSMS 與 ELMO 之間的初步連接。</p>
+
+<table><thead>
+<tr>
+<th></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td style="text-align: left"><strong>模擬 ELMO 發送 Handshake 請求</strong></td>
+<td style="text-align: left">(測試環境 Only)<br>手動觸發測試平台的 <code>handshake callback</code>，模擬 ELMO 發送 Handshake 請求。</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: left"><strong>CSMS 接收 Handshake 請求</strong></td>
+<td style="text-align: left">CSMS 接收到來自 ELMO 的 <code>handshake</code>，表示啟動初步連接流程。</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: left"><strong>CSMS 回應 Handshake Acknowledge</strong></td>
+<td style="text-align: left">CSMS 需要向 ELMO 回覆 <code>handshake_acknowledge</code>，確認連接成功。</td>
+</tr>
+</tbody></table>
+<h2 id='a1e9a37f24'>日前型協商</h2>
+<p>日前型協商流程用於 ELMO 與 CSMS 進行協商與確認充電站的可用容量。</p>
+<h3 id='9cbc7bb5b5'>指定容量通知</h3>
+<p>ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日的充電站可用容量。</p>
+
+<table><thead>
+<tr>
+<th></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td style="text-align: left"><strong>模擬 ELMO 發送指定容量通知</strong></td>
+<td style="text-align: left">(測試環境 Only)<br>手動觸發測試平台的 <code>update_group_capacity_forecast callback</code>，<br><code>purpose</code> 帶入 <code>negotiation_assign_capacity</code>，<br>模擬 ELMO 發送指定容量通知請求。</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: left"><strong>CSMS 接收指定容量通知</strong></td>
+<td style="text-align: left">CSMS 接收到來自 ELMO 的 <code>update_group_capacity_forecast</code>，日期為隔日，可取得隔日充電站可用容量。</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: left"><strong>套用指定容量</strong></td>
+<td style="text-align: left">CSMS 根據通知套用指定容量。</td>
+</tr>
+</tbody></table>
+<h3 id='47fddd80c1'>申請額外可用容量</h3>
+<p>當 CSMS 判斷充電站在隔日需要額外的容量時，在當日 14:00 前可以向 ELMO 申請額外可用容量。ELMO 會在當日 16:00 前，回覆 CSMS 申請結果。</p>
+
+<table><thead>
+<tr>
+<th></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td style="text-align: left"><strong>CSMS 發送額外可用容量申請</strong></td>
+<td style="text-align: left">CSMS 向 ELMO 發送 <code>adjust_group_capacity_forecast</code> 請求，申請隔日的額外可用容量。</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: left"><strong>模擬 ELMO 回覆額外可用容量</strong></td>
+<td style="text-align: left">(測試環境 Only)<br>手動觸發測試平台的 <code>update_group_capacity_forecast callback</code>，<br><code>purpose</code> 帶入 <code>negotiation_reply_request_additional_capacity</code>，<br>模擬 ELMO 回覆額外可用容量申請。</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: left"><strong>CSMS 接收額外可用容量回覆</strong></td>
+<td style="text-align: left">CSMS 接收到來自 ELMO 的 <code>update_group_capacity_forecast</code>，日期為隔日，可取得更新的隔日充電站可用容量。</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align: left"><strong>套用指定容量</strong></td>
+<td style="text-align: left">CSMS 根據回覆套用指定容量。</td>
+</tr>
+</tbody></table>
+<h2 id='7513deaf2b'>緊急通知</h2>
+<p>當 ELMO 需要調控當日接下來的可用容量時，會發送緊急通知。</p>
+
+<table><thead>
+<tr>
+<th></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td style="text-align: left"><strong>模擬 ELMO 發送緊急通知</strong></td>
+<td style="text-align: left">(測試環境 Only)<br>手動觸發測試平台的 <code>update_group_capacity_forecast callback</code>，<br><code>purpose</code> 帶入 <code>emergency_assign_capacity</code>，<br>模擬 ELMO 發送指定容量通知請求。</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: left"><strong>CSMS 接收緊急通知</strong></td>
+<td style="text-align: left">CSMS 接收到來自 ELMO 的 <code>update_group_capacity_forecast</code>，日期為當日，表示緊急調控可用容量。</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: left"><strong>套用指定容量</strong></td>
+<td style="text-align: left">CSMS 根據通知快速套用緊急調控的容量。</td>
+</tr>
+</tbody></table>
+<h2 id='4ed4c1802d'>回報累積用電量</h2>
+<p>此流程用於 CSMS 向 ELMO 回報充電站的累積用電量。</p>
+
+<table><thead>
+<tr>
+<th></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td style="text-align: left"><strong>收集充電站用電量</strong></td>
+<td style="text-align: left">CSMS 收集充電站的累積用電量 (kWh)</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: left"><strong>CSMS 發送累積用電量更新</strong></td>
+<td style="text-align: left">CSMS 向 ELMO 發送 <code>update_group_measurements</code>，回報充電站累積用電量。</td>
+</tr>
+</tbody></table>
+<h1 id='messages-general'>Messages - General</h1><h2 id='http-requests'>HTTP Requests</h2>
+<p>參見 OSCP 2.0 Specification – 4.1.2. HTTP Requests</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">HTTP Header</th>
+<th style="text-align: left">Purpose</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code>Authorization</code></td>
+<td style="text-align: left"><code>Token &lt;ELMO-AUTH-TOKEN&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><code>X-Request-ID</code></td>
+<td style="text-align: left">(Unique request ID of this message.)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>X-Correlation-ID</code></td>
+<td style="text-align: left">(Reference to a request ID that this message is a response to.)</td>
+</tr>
+</tbody></table>
+<h1 id='messages-register'>Messages - Register</h1><h2 id='csms-elmo'>CSMS 向 ELMO 發送註冊請求</h2>
+<blockquote>
+<p>Example request message :</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"csms-oscp-token"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version_url"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"base_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://csms-base-url/oscp/fp/2.0"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='endpoints'>Endpoints</h3>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Endpoint</strong></td>
+<td style="text-align: left"><code>&lt;OSCP_PREFIX&gt;/register</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>HTTP Method</strong></td>
+<td style="text-align: left"><code>POST</code></td>
+</tr>
+</tbody></table>
+<h3 id='message'>Message</h3>
+<p>參見 OSCP 2.0 Specification – 4.3.1.1. Register</p>
+<h2 id='elmo'>模擬 ELMO 發送註冊回應</h2>
+<blockquote>
+<p>Example request message :</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"callback_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://csms-base-url/oscp/fp/2.0/register"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;CSMS-AUTH-TOKEN&gt;"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='endpoints-2'>Endpoints</h3>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Endpoint</strong></td>
+<td style="text-align: left"><code>&lt;CALLBACK_PREFIX&gt;/register</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>HTTP Method</strong></td>
+<td style="text-align: left"><code>POST</code></td>
+</tr>
+</tbody></table>
+<h3 id='message-2'>Message</h3>
+<table><thead>
+<tr>
+<th style="text-align: left">Field Name</th>
+<th style="text-align: left">Field Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code>callback_url</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">CSMS 接收 OSCP Register 的 URL</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>header.authorization</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">CSMS 接收 OSCP 的 token</td>
+</tr>
+</tbody></table>
+<h1 id='messages-handshake'>Messages - Handshake</h1><h2 id='elmo-handshake'>模擬 ELMO 發送 Handshake 請求</h2>
+<blockquote>
+<p>Example request message :</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"callback_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://csms-base-url/oscp/fp/2.0/handshake"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;CSMS-AUTH-TOKEN&gt;"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='endpoints-3'>Endpoints</h3>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Endpoint</strong></td>
+<td style="text-align: left"><code>&lt;CALLBACK_PREFIX&gt;/handshake</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>HTTP Method</strong></td>
+<td style="text-align: left"><code>POST</code></td>
+</tr>
+</tbody></table>
+<h3 id='message-3'>Message</h3>
+<table><thead>
+<tr>
+<th style="text-align: left">Field Name</th>
+<th style="text-align: left">Field Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code>callback_url</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">CSMS 接收 OSCP Handshake 的 URL</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>header.authorization</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">CSMS 接收 OSCP 的 token</td>
+</tr>
+</tbody></table>
+<h2 id='csms-handshake-acknowledge'>CSMS 回應 Handshake Acknowledge</h2>
+<blockquote>
+<p>Example request message :</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
+</span></code></pre></div><h3 id='endpoints-4'>Endpoints</h3>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Endpoint</strong></td>
+<td style="text-align: left"><code>&lt;OSCP_PREFIX&gt;/handshake_acknowledge</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>HTTP Method</strong></td>
+<td style="text-align: left"><code>POST</code></td>
+</tr>
+</tbody></table>
+<h3 id='message-4'>Message</h3>
+<p>參見 OSCP 2.0 Specification – 4.3.3. HandshakeAcknowledge</p>
+<h1 id='messages'>Messages - 日前型協商</h1><h2 id='elmo-2'>模擬 ELMO 發送指定容量通知</h2>
+<blockquote>
+<p>Example request message :</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"callback_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://csms-base-url/oscp/fp/2.0/update_group_capacity_forecast"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CSMS_TOKEN"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"negotiation_assign_capacity"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"group_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHARGING_STATION_ID"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='endpoints-5'>Endpoints</h3>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Endpoint</strong></td>
+<td style="text-align: left"><code>&lt;CALLBACK_PREFIX&gt;/update_group_capacity_forecast</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>HTTP Method</strong></td>
+<td style="text-align: left"><code>POST</code></td>
+</tr>
+</tbody></table>
+<h3 id='message-5'>Message</h3>
+<table><thead>
+<tr>
+<th style="text-align: left">Field Name</th>
+<th style="text-align: left">Field Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code>callback_url</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">CSMS 接收 OSCP UpdateGroupCapacityForecast 的 URL</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>header.authorization</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">CSMS 接收 OSCP 的 token</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>purpose</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">帶入 <code>negotiation_assign_capacity</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><code>group_id</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">ELMO 提供的充電站 ID</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>capacity</code></td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">指定可用容量 (kW)</td>
+</tr>
+</tbody></table>
+<h2 id='csms'>CSMS 發送額外可用容量申請</h2>
+<blockquote>
+<p>Example request message :</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"group_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHARGING_STATION_ID"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONSUMPTION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"forecasted_blocks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T00:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T01:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T01:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T02:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T02:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T03:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T03:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T04:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T04:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T05:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T05:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T06:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T06:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T07:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T07:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T08:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T08:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T09:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T09:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T10:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T10:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T11:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T11:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T12:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T12:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T13:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T13:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T14:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T14:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T15:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T15:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T16:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T16:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T17:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T17:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T18:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T18:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T19:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T19:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T20:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T20:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T21:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T21:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T22:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T22:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T23:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KW"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-13T23:00:00.000+08:00"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-09-14T00:00:00.000+08:00"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='endpoints-6'>Endpoints</h3>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Endpoint</strong></td>
+<td style="text-align: left"><code>&lt;OSCP_PREFIX&gt;/adjust_group_capacity_forecast</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>HTTP Method</strong></td>
+<td style="text-align: left"><code>POST</code></td>
+</tr>
+</tbody></table>
+<h3 id='message-6'>Message</h3>
+<p>參見 OSCP 2.0 Specification – 4.4.2. AdjustGroupCapacityForecast</p>
+<h2 id='elmo-3'>模擬 ELMO 回覆額外可用容量</h2>
+<blockquote>
+<p>Example request message :</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"callback_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://csms-base-url/oscp/fp/2.0/update_group_capacity_forecast"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CSMS_TOKEN"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"negotiation_reply_request_additional_capacity"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"group_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHARGING_STATION_ID"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='endpoints-7'>Endpoints</h3>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Endpoint</strong></td>
+<td style="text-align: left"><code>&lt;CALLBACK_PREFIX&gt;/update_group_capacity_forecast</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>HTTP Method</strong></td>
+<td style="text-align: left"><code>POST</code></td>
+</tr>
+</tbody></table>
+<h3 id='message-7'>Message</h3>
+<table><thead>
+<tr>
+<th style="text-align: left">Field Name</th>
+<th style="text-align: left">Field Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code>callback_url</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">CSMS 接收 OSCP UpdateGroupCapacityForecast 的 URL</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>header.authorization</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">CSMS 接收 OSCP 的 token</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>purpose</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">帶入 <code>negotiation_reply_request_additional_capacity</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><code>group_id</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">ELMO 提供的充電站 ID</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>capacity</code></td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">指定可用容量 (kW)</td>
+</tr>
+</tbody></table>
+<h1 id='messages-2'>Messages - 緊急通知</h1><h2 id='elmo-4'>模擬 ELMO 發送緊急通知</h2>
+<blockquote>
+<p>Example request message :</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"callback_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://csms-base-url/oscp/fp/2.0/update_group_capacity_forecast"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"authorization"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CSMS_TOKEN"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"purpose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"emergency_assign_capacity"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"group_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHARGING_STATION_ID"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='endpoints-8'>Endpoints</h3>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Endpoint</strong></td>
+<td style="text-align: left"><code>&lt;CALLBACK_PREFIX&gt;/update_group_capacity_forecast</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>HTTP Method</strong></td>
+<td style="text-align: left"><code>POST</code></td>
+</tr>
+</tbody></table>
+<h3 id='message-8'>Message</h3>
+<table><thead>
+<tr>
+<th style="text-align: left">Field Name</th>
+<th style="text-align: left">Field Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code>callback_url</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">CSMS 接收 OSCP UpdateGroupCapacityForecast 的 URL</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>header.authorization</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">CSMS 接收 OSCP 的 token</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>purpose</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">帶入 <code>emergency_assign_capacity</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><code>group_id</code></td>
+<td style="text-align: left">string</td>
+<td style="text-align: left">ELMO 提供的充電站 ID</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>capacity</code></td>
+<td style="text-align: left">number</td>
+<td style="text-align: left">指定可用容量 (kW)</td>
+</tr>
+</tbody></table>
+<h1 id='messages-3'>Messages - 回報累積用電量</h1><h2 id='csms-2'>CSMS 發送累積用電量更新</h2>
+<blockquote>
+<p>Example request message :</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"group_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CSMS-GROUP-ID"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"measurements"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">123.456</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KWH"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IMPORT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"measure_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-01-01T11:22:33.456+08:00"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='endpoints-9'>Endpoints</h3>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Endpoint</strong></td>
+<td style="text-align: left"><code>&lt;OSCP_PREFIX&gt;/update_group_measurements</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>HTTP Method</strong></td>
+<td style="text-align: left"><code>POST</code></td>
+</tr>
+</tbody></table>
+<h3 id='message-9'>Message</h3>
+<p>參見 OSCP 2.0 Specification – 4.5.1. UpdateGroupMeasurements</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="json">json</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
