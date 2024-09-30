@@ -174,6 +174,23 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 | `callback_url`         | string     | CSMS 接收 OSCP Register 的 URL |
 | `header.authorization` | string     | CSMS 接收 OSCP 的 token        |
 
+> Example callback message :
+
+```json
+{
+  "token": "<ELMO-AUTH-TOKEN>",
+  "version_url": [
+  	{
+  	  "version": "2.0",
+  	  "base_url": "<ELMO-OSCP-BASE-URL>"
+  	}
+  ]
+}
+```
+
+### Callback Message
+
+參見 OSCP 2.0 Specification – 4.3.1.1. Register
 
 
 # Messages - Handshake
@@ -204,6 +221,20 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 |:-----------------------|:-----------|:----------------------------|
 | `callback_url`         | string     | CSMS 接收 OSCP Handshake 的 URL |
 | `header.authorization` | string     | CSMS 接收 OSCP 的 token        |
+
+> Example callback message :
+
+```json
+{
+  "measurement_configuration": [
+  	"CONTINUOUS"
+  ]
+}
+```
+
+### Callback Message
+
+參見 OSCP 2.0 Specification – 4.3.2. Handshake
 
 
 ## CSMS 回應 Handshake Acknowledge
@@ -260,6 +291,189 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 | `purpose`              | string     | 帶入 `negotiation_assign_capacity`               |
 | `group_id`             | string     | ELMO 提供的充電站 ID                                 |
 | `capacity`             | number     | 指定可用容量 (kW)                                    |
+
+> Example callback message :
+
+```json
+{
+  "group_id": "CHARGING_STATION_ID",
+  "type": "CONSUMPTION",
+  "forecasted_blocks": [
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T00:00:00.000+08:00",
+      "end_time": "2024-10-01T01:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T01:00:00.000+08:00",
+      "end_time": "2024-10-01T02:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T02:00:00.000+08:00",
+      "end_time": "2024-10-01T03:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T03:00:00.000+08:00",
+      "end_time": "2024-10-01T04:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T04:00:00.000+08:00",
+      "end_time": "2024-10-01T05:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T05:00:00.000+08:00",
+      "end_time": "2024-10-01T06:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T06:00:00.000+08:00",
+      "end_time": "2024-10-01T07:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T07:00:00.000+08:00",
+      "end_time": "2024-10-01T08:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T08:00:00.000+08:00",
+      "end_time": "2024-10-01T09:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T09:00:00.000+08:00",
+      "end_time": "2024-10-01T10:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T10:00:00.000+08:00",
+      "end_time": "2024-10-01T11:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T11:00:00.000+08:00",
+      "end_time": "2024-10-01T12:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T12:00:00.000+08:00",
+      "end_time": "2024-10-01T13:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T13:00:00.000+08:00",
+      "end_time": "2024-10-01T14:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T14:00:00.000+08:00",
+      "end_time": "2024-10-01T15:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T15:00:00.000+08:00",
+      "end_time": "2024-10-01T16:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T16:00:00.000+08:00",
+      "end_time": "2024-10-01T17:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T17:00:00.000+08:00",
+      "end_time": "2024-10-01T18:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T18:00:00.000+08:00",
+      "end_time": "2024-10-01T19:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T19:00:00.000+08:00",
+      "end_time": "2024-10-01T20:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T20:00:00.000+08:00",
+      "end_time": "2024-10-01T21:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T21:00:00.000+08:00",
+      "end_time": "2024-10-01T22:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T22:00:00.000+08:00",
+      "end_time": "2024-10-01T23:00:00.000+08:00"
+    },
+    {
+      "capacity": 100,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T23:00:00.000+08:00",
+      "end_time": "2024-10-02T00:00:00.000+08:00"
+    }
+  ]
+}
+```
+
+### Callback Message
+
+參見 OSCP 2.0 Specification – 4.4.1. UpdateGroupCapacityForecast
 
 
 ## CSMS 發送額外可用容量申請
@@ -488,6 +702,189 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 | `group_id`             | string     | ELMO 提供的充電站 ID                                     |
 | `capacity`             | number     | 指定可用容量 (kW)                                        |
 
+> Example callback message :
+
+```json
+{
+  "group_id": "CHARGING_STATION_ID",
+  "type": "CONSUMPTION",
+  "forecasted_blocks": [
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T00:00:00.000+08:00",
+      "end_time": "2024-10-01T01:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T01:00:00.000+08:00",
+      "end_time": "2024-10-01T02:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T02:00:00.000+08:00",
+      "end_time": "2024-10-01T03:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T03:00:00.000+08:00",
+      "end_time": "2024-10-01T04:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T04:00:00.000+08:00",
+      "end_time": "2024-10-01T05:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T05:00:00.000+08:00",
+      "end_time": "2024-10-01T06:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T06:00:00.000+08:00",
+      "end_time": "2024-10-01T07:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T07:00:00.000+08:00",
+      "end_time": "2024-10-01T08:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T08:00:00.000+08:00",
+      "end_time": "2024-10-01T09:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T09:00:00.000+08:00",
+      "end_time": "2024-10-01T10:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T10:00:00.000+08:00",
+      "end_time": "2024-10-01T11:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T11:00:00.000+08:00",
+      "end_time": "2024-10-01T12:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T12:00:00.000+08:00",
+      "end_time": "2024-10-01T13:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T13:00:00.000+08:00",
+      "end_time": "2024-10-01T14:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T14:00:00.000+08:00",
+      "end_time": "2024-10-01T15:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T15:00:00.000+08:00",
+      "end_time": "2024-10-01T16:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T16:00:00.000+08:00",
+      "end_time": "2024-10-01T17:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T17:00:00.000+08:00",
+      "end_time": "2024-10-01T18:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T18:00:00.000+08:00",
+      "end_time": "2024-10-01T19:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T19:00:00.000+08:00",
+      "end_time": "2024-10-01T20:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T20:00:00.000+08:00",
+      "end_time": "2024-10-01T21:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T21:00:00.000+08:00",
+      "end_time": "2024-10-01T22:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T22:00:00.000+08:00",
+      "end_time": "2024-10-01T23:00:00.000+08:00"
+    },
+    {
+      "capacity": 150,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T23:00:00.000+08:00",
+      "end_time": "2024-10-02T00:00:00.000+08:00"
+    }
+  ]
+}
+```
+
+### Callback Message
+
+參見 OSCP 2.0 Specification – 4.4.1. UpdateGroupCapacityForecast
+
 
 # Messages - 緊急通知
 
@@ -523,6 +920,28 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 | `purpose`              | string     | 帶入 `emergency_assign_capacity`                 |
 | `group_id`             | string     | ELMO 提供的充電站 ID                                 |
 | `capacity`             | number     | 指定可用容量 (kW)                                    |
+
+> Example callback message :
+
+```json
+{
+  "group_id": "CHARGING_STATION_ID",
+  "type": "CONSUMPTION",
+  "forecasted_blocks": [
+    {
+      "capacity": 50,
+      "phase": "ALL",
+      "unit": "KW",
+      "start_time": "2024-10-01T16:15:00.000+08:00",
+      "end_time": "2024-10-02T00:00:00.000+08:00"
+    }
+  ]
+}
+```
+
+### Callback Message
+
+參見 OSCP 2.0 Specification – 4.4.1. UpdateGroupCapacityForecast
 
 
 # Messages - 回報累積用電量
