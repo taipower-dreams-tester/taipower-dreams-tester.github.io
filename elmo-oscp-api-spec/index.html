@@ -407,7 +407,13 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='elmo-oscp-api-specification'>ELMO OSCP API Specification</h1>
-<p>此文件描述 CSMS 如何透過 OSCP API 與 ELMO 進行各種溝通流程，包含 Register、Handshake、日前型協商及緊急通知等流程。</p>
+<p>此文件描述了 CSMS 如何通過 OSCP API 與台電 ELMO 系統進行各項通訊流程，包括註冊（Register）、握手（Handshake）、日前型協商及緊急通知等流程。</p>
+
+<p>此外，為了協助 CSMS 開發商實作 OSCP API，本文件也提供一套 ELMO 模擬器，讓開發商可以直接使用如 Postman 等工具，向模擬器發送訊息，並取得 ELMO 模擬 message。</p>
+
+<p>有意與 ELMO 連線的 CSMS 開發者，可向台電申請測試環境所需的 Token 及連線方式，以便進行與 ELMO 模擬器的測試與開發。</p>
+
+<p>ELMO 模擬器的訊息需由 CSMS 開發者手動觸發，以模擬接收來自 ELMO 的訊息，進行測試和調整。</p>
 <h1 id='elmo-oscp'>ELMO OSCP 測試環境</h1>
 <table><thead>
 <tr>
@@ -455,7 +461,7 @@
 <tr>
 <td>3</td>
 <td style="text-align: left"><strong>模擬 ELMO 發送註冊回應</strong></td>
-<td style="text-align: left">(測試環境 Only)<br>手動觸發測試平台的 <code>register callback</code>，模擬 ELMO 回應。</td>
+<td style="text-align: left">(ELMO 模擬器：測試環境 Only)<br>手動觸發測試平台的 <code>register callback</code>，模擬 ELMO 回應。</td>
 </tr>
 <tr>
 <td>4</td>
@@ -481,7 +487,7 @@
 <tr>
 <td>1</td>
 <td style="text-align: left"><strong>模擬 ELMO 發送 Handshake 請求</strong></td>
-<td style="text-align: left">(測試環境 Only)<br>手動觸發測試平台的 <code>handshake callback</code>，模擬 ELMO 發送 Handshake 請求。</td>
+<td style="text-align: left">(ELMO 模擬器：測試環境 Only)<br>手動觸發測試平台的 <code>handshake callback</code>，模擬 ELMO 發送 Handshake 請求。</td>
 </tr>
 <tr>
 <td>2</td>
@@ -509,7 +515,7 @@
 <tr>
 <td>1</td>
 <td style="text-align: left"><strong>模擬 ELMO 發送指定容量通知</strong></td>
-<td style="text-align: left">(測試環境 Only)<br>手動觸發測試平台的 <code>update_group_capacity_forecast callback</code>，<br><code>purpose</code> 帶入 <code>negotiation_assign_capacity</code>，<br>模擬 ELMO 發送指定容量通知請求。</td>
+<td style="text-align: left">(ELMO 模擬器：測試環境 Only)<br>手動觸發測試平台的 <code>update_group_capacity_forecast callback</code>，<br><code>purpose</code> 帶入 <code>negotiation_assign_capacity</code>，<br>模擬 ELMO 發送指定容量通知請求。</td>
 </tr>
 <tr>
 <td>2</td>
@@ -540,7 +546,7 @@
 <tr>
 <td>2</td>
 <td style="text-align: left"><strong>模擬 ELMO 回覆額外可用容量</strong></td>
-<td style="text-align: left">(測試環境 Only)<br>手動觸發測試平台的 <code>update_group_capacity_forecast callback</code>，<br><code>purpose</code> 帶入 <code>negotiation_reply_request_additional_capacity</code>，<br>模擬 ELMO 回覆額外可用容量申請。</td>
+<td style="text-align: left">(ELMO 模擬器：測試環境 Only)<br>手動觸發測試平台的 <code>update_group_capacity_forecast callback</code>，<br><code>purpose</code> 帶入 <code>negotiation_reply_request_additional_capacity</code>，<br>模擬 ELMO 回覆額外可用容量申請。</td>
 </tr>
 <tr>
 <td>3</td>
@@ -566,7 +572,7 @@
 <tr>
 <td>1</td>
 <td style="text-align: left"><strong>模擬 ELMO 發送緊急通知</strong></td>
-<td style="text-align: left">(測試環境 Only)<br>手動觸發測試平台的 <code>update_group_capacity_forecast callback</code>，<br><code>purpose</code> 帶入 <code>emergency_assign_capacity</code>，<br>模擬 ELMO 發送指定容量通知請求。</td>
+<td style="text-align: left">(ELMO 模擬器：測試環境 Only)<br>手動觸發測試平台的 <code>update_group_capacity_forecast callback</code>，<br><code>purpose</code> 帶入 <code>emergency_assign_capacity</code>，<br>模擬 ELMO 發送指定容量通知請求。</td>
 </tr>
 <tr>
 <td>2</td>
