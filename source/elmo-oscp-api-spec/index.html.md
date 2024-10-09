@@ -18,7 +18,14 @@ meta:
 
 # ELMO OSCP API Specification
 
-此文件描述 CSMS 如何透過 OSCP API 與 ELMO 進行各種溝通流程，包含 Register、Handshake、日前型協商及緊急通知等流程。
+此文件描述了 CSMS 如何通過 OSCP API 與台電 ELMO 系統進行各項通訊流程，包括註冊（Register）、握手（Handshake）、日前型協商及緊急通知等流程。
+
+此外，為了協助 CSMS 開發商實作 OSCP API，本文件也提供一套 ELMO 模擬器，讓開發商可以直接使用如 Postman 等工具，向模擬器發送訊息，並取得 ELMO 模擬 message。
+
+有意與 ELMO 連線的 CSMS 開發者，可向台電申請測試環境所需的 Token 及連線方式，以便進行與 ELMO 模擬器的測試與開發。
+
+ELMO 模擬器的訊息需由 CSMS 開發者手動觸發，以模擬接收來自 ELMO 的訊息，進行測試和調整。
+
 
 # ELMO OSCP 測試環境
 
@@ -36,24 +43,24 @@ meta:
 
 Register 流程用於 CSMS 初次註冊並取得 ELMO OSCP API 的使用權限。
 
-|   |                        |                                                          |
-|---|:-----------------------|:---------------------------------------------------------|
-| 1 | **取得 Initial Token**   | 向 ELMO 管理員取得 initial token。                              |
-| 2 | **CSMS 向 ELMO 發送註冊請求** | CSMS 發送 `register` 請求到 ELMO，進行註冊。                        |
-| 3 | **模擬 ELMO 發送註冊回應**     | (測試環境 Only)<br>手動觸發測試平台的 `register callback`，模擬 ELMO 回應。 |
-| 4 | **CSMS 接收註冊回應**        | CSMS 會接收到來自 ELMO 的 `register` 回應，表示註冊成功。                 |
-| 5 | **儲存 ELMO Token**      | 註冊成功後，CSMS 需儲存向 ELMO 認證用的 token。                         |
+|   |                        |                                                                   |
+|---|:-----------------------|:------------------------------------------------------------------|
+| 1 | **取得 Initial Token**   | 向 ELMO 管理員取得 initial token。                                       |
+| 2 | **CSMS 向 ELMO 發送註冊請求** | CSMS 發送 `register` 請求到 ELMO，進行註冊。                                 |
+| 3 | **模擬 ELMO 發送註冊回應**     | (ELMO 模擬器：測試環境 Only)<br>手動觸發測試平台的 `register callback`，模擬 ELMO 回應。 |
+| 4 | **CSMS 接收註冊回應**        | CSMS 會接收到來自 ELMO 的 `register` 回應，表示註冊成功。                          |
+| 5 | **儲存 ELMO Token**      | 註冊成功後，CSMS 需儲存向 ELMO 認證用的 token。                                  |
 
 
 ## Handshake
 
 Handshake 流程用於建立 CSMS 與 ELMO 之間的初步連接。
 
-|   |                                   |                                                                        |
-|---|:----------------------------------|:-----------------------------------------------------------------------|
-| 1 | **模擬 ELMO 發送 Handshake 請求**       | (測試環境 Only)<br>手動觸發測試平台的 `handshake callback`，模擬 ELMO 發送 Handshake 請求。 |
-| 2 | **CSMS 接收 Handshake 請求**          | CSMS 接收到來自 ELMO 的 `handshake`，表示啟動初步連接流程。                              |
-| 3 | **CSMS 回應 Handshake Acknowledge** | CSMS 需要向 ELMO 回覆 `handshake_acknowledge`，確認連接成功。                       |
+|   |                                   |                                                                                 |
+|---|:----------------------------------|:--------------------------------------------------------------------------------|
+| 1 | **模擬 ELMO 發送 Handshake 請求**       | (ELMO 模擬器：測試環境 Only)<br>手動觸發測試平台的 `handshake callback`，模擬 ELMO 發送 Handshake 請求。 |
+| 2 | **CSMS 接收 Handshake 請求**          | CSMS 接收到來自 ELMO 的 `handshake`，表示啟動初步連接流程。                                       |
+| 3 | **CSMS 回應 Handshake Acknowledge** | CSMS 需要向 ELMO 回覆 `handshake_acknowledge`，確認連接成功。                                |
 
 
 ## 日前型協商
@@ -64,34 +71,34 @@ Handshake 流程用於建立 CSMS 與 ELMO 之間的初步連接。
 
 ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日的充電站可用容量。
 
-|   |                      |                                                                                                                                           |
-|---|:---------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
-| 1 | **模擬 ELMO 發送指定容量通知** | (測試環境 Only)<br>手動觸發測試平台的 `update_group_capacity_forecast callback`，<br>`purpose` 帶入 `negotiation_assign_capacity`，<br>模擬 ELMO 發送指定容量通知請求。 |
-| 2 | **CSMS 接收指定容量通知**    | CSMS 接收到來自 ELMO 的 `update_group_capacity_forecast`，日期為隔日，可取得隔日充電站可用容量。                                                                    |
-| 3 | **套用指定容量**           | CSMS 根據通知套用指定容量。                                                                                                                          |
+|   |                      |                                                                                                                                                    |
+|---|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1 | **模擬 ELMO 發送指定容量通知** | (ELMO 模擬器：測試環境 Only)<br>手動觸發測試平台的 `update_group_capacity_forecast callback`，<br>`purpose` 帶入 `negotiation_assign_capacity`，<br>模擬 ELMO 發送指定容量通知請求。 |
+| 2 | **CSMS 接收指定容量通知**    | CSMS 接收到來自 ELMO 的 `update_group_capacity_forecast`，日期為隔日，可取得隔日充電站可用容量。                                                                             |
+| 3 | **套用指定容量**           | CSMS 根據通知套用指定容量。                                                                                                                                   |
 
 
 ### 申請額外可用容量
 
 當 CSMS 判斷充電站在隔日需要額外的容量時，在當日 14:00 前可以向 ELMO 申請額外可用容量。ELMO 會在當日 16:00 前，回覆 CSMS 申請結果。
 
-|   |                      |                                                                                                                                                             |
-|---|:---------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1 | **CSMS 發送額外可用容量申請**  | CSMS 向 ELMO 發送 `adjust_group_capacity_forecast` 請求，申請隔日的額外可用容量。                                                                                             |
-| 2 | **模擬 ELMO 回覆額外可用容量** | (測試環境 Only)<br>手動觸發測試平台的 `update_group_capacity_forecast callback`，<br>`purpose` 帶入 `negotiation_reply_request_additional_capacity`，<br>模擬 ELMO 回覆額外可用容量申請。 |
-| 3 | **CSMS 接收額外可用容量回覆**  | CSMS 接收到來自 ELMO 的 `update_group_capacity_forecast`，日期為隔日，可取得更新的隔日充電站可用容量。                                                                                   |
-| 4 | **套用指定容量**           | CSMS 根據回覆套用指定容量。                                                                                                                                            |
+|   |                      |                                                                                                                                                                      |
+|---|:---------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1 | **CSMS 發送額外可用容量申請**  | CSMS 向 ELMO 發送 `adjust_group_capacity_forecast` 請求，申請隔日的額外可用容量。                                                                                                      |
+| 2 | **模擬 ELMO 回覆額外可用容量** | (ELMO 模擬器：測試環境 Only)<br>手動觸發測試平台的 `update_group_capacity_forecast callback`，<br>`purpose` 帶入 `negotiation_reply_request_additional_capacity`，<br>模擬 ELMO 回覆額外可用容量申請。 |
+| 3 | **CSMS 接收額外可用容量回覆**  | CSMS 接收到來自 ELMO 的 `update_group_capacity_forecast`，日期為隔日，可取得更新的隔日充電站可用容量。                                                                                            |
+| 4 | **套用指定容量**           | CSMS 根據回覆套用指定容量。                                                                                                                                                     |
 
 
 ## 緊急通知
 
 當 ELMO 需要調控當日接下來的可用容量時，會發送緊急通知。
 
-|   |                    |                                                                                                                                         |
-|---|:-------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
-| 1 | **模擬 ELMO 發送緊急通知** | (測試環境 Only)<br>手動觸發測試平台的 `update_group_capacity_forecast callback`，<br>`purpose` 帶入 `emergency_assign_capacity`，<br>模擬 ELMO 發送指定容量通知請求。 |
-| 2 | **CSMS 接收緊急通知**    | CSMS 接收到來自 ELMO 的 `update_group_capacity_forecast`，日期為當日，表示緊急調控可用容量。                                                                    |
-| 3 | **套用指定容量**         | CSMS 根據通知快速套用緊急調控的容量。                                                                                                                   |
+|   |                    |                                                                                                                                                  |
+|---|:-------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1 | **模擬 ELMO 發送緊急通知** | (ELMO 模擬器：測試環境 Only)<br>手動觸發測試平台的 `update_group_capacity_forecast callback`，<br>`purpose` 帶入 `emergency_assign_capacity`，<br>模擬 ELMO 發送指定容量通知請求。 |
+| 2 | **CSMS 接收緊急通知**    | CSMS 接收到來自 ELMO 的 `update_group_capacity_forecast`，日期為當日，表示緊急調控可用容量。                                                                             |
+| 3 | **套用指定容量**         | CSMS 根據通知快速套用緊急調控的容量。                                                                                                                            |
 
 ## 回報累積用電量
 
@@ -101,7 +108,7 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 |---|:-------------------|:-------------------------------------------------------|
 | 1 | **收集充電站用電量**       | CSMS 收集充電站的累積用電量 (kWh)                                 |
 | 2 | **CSMS 發送累積用電量更新** | CSMS 向 ELMO 發送 `update_group_measurements`，回報充電站累積用電量。 |
-| 3 | **回傳頻率**            | CSMS 需要每 1 分鐘回報充電站的累積用電量。                              |
+| 3 | **回傳頻率**           | CSMS 需要每 1 分鐘回報充電站的累積用電量。                              |
 
 
 # Messages - General
@@ -217,10 +224,10 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 ### Message
 
-| Field Name             | Field Type | Description                 |
-|:-----------------------|:-----------|:----------------------------|
+| Field Name             | Field Type | Description                  |
+|:-----------------------|:-----------|:-----------------------------|
 | `callback_url`         | string     | CSMS 接收 OSCP Handshake 的 URL |
-| `header.authorization` | string     | CSMS 接收 OSCP 的 token        |
+| `header.authorization` | string     | CSMS 接收 OSCP 的 token         |
 
 > Example callback message :
 
