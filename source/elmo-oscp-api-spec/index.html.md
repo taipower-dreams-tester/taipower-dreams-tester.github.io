@@ -124,6 +124,14 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 | `X-Correlation-ID` | (Reference to a request ID that this message is a response to.) |
 
 
+## HTTP Responses
+
+如果 HTTP request 有效且沒有發生錯誤，需回傳一個不帶 payload 的 HTTP response，且 HTTP status code 需為 `204 NO CONTENT`。
+
+CSMS 如果沒回應 `204 NO CONTENT`，ELMO 會當作失敗。
+
+參見 OSCP 2.0 Specification – 4.1.3. HTTP Responses
+
 # Messages - Register
 
 ## CSMS 向 ELMO 發送註冊請求
@@ -136,7 +144,7 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
   "version_url": [
     {
       "version": "2.0",
-      "base_url": "https://csms-base-url/oscp/fp/2.0"
+      "base_url": "https://<YOUR_CSMS_OSCP_PATH>"
     }
   ]
 }
@@ -160,7 +168,7 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 ```json
 {
-  "callback_url": "https://csms-base-url/oscp/fp/2.0/register",
+  "callback_url": "https://<YOUR_CSMS_OSCP_PATH>/register",
   "header": {
     "authorization": "<CSMS-AUTH-TOKEN>"
   }
@@ -208,7 +216,7 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 ```json
 {
-  "callback_url": "https://csms-base-url/oscp/fp/2.0/handshake",
+  "callback_url": "https://<YOUR_CSMS_OSCP_PATH>/handshake",
   "header": {
     "authorization": "<CSMS-AUTH-TOKEN>"
   }
@@ -272,7 +280,7 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 ```json
 {
-  "callback_url": "https://csms-base-url/oscp/fp/2.0/update_group_capacity_forecast",
+  "callback_url": "https://<YOUR_CSMS_OSCP_PATH>/update_group_capacity_forecast",
   "header": {
     "authorization": "CSMS_TOKEN"
   },
@@ -682,7 +690,7 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 ```json
 {
-  "callback_url": "https://csms-base-url/oscp/fp/2.0/update_group_capacity_forecast",
+  "callback_url": "https://<YOUR_CSMS_OSCP_PATH>/update_group_capacity_forecast",
   "header": {
     "authorization": "CSMS_TOKEN"
   },
@@ -901,7 +909,7 @@ ELMO 會在每日 10:00 前，向 CSMS 發送指定容量通知，提供隔日�
 
 ```json
 {
-  "callback_url": "https://csms-base-url/oscp/fp/2.0/update_group_capacity_forecast",
+  "callback_url": "https://<YOUR_CSMS_OSCP_PATH>/update_group_capacity_forecast",
   "header": {
     "authorization": "CSMS_TOKEN"
   },
