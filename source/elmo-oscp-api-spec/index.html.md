@@ -26,6 +26,10 @@ meta:
 
 ELMO 模擬器的訊息需由 CSMS 開發者手動觸發，以模擬接收來自 ELMO 的訊息，進行測試和調整。
 
+<aside class="notice">
+OSCP 2.0 Specification 可在 Open Charge Alliance 網站上取得：<a href="https://openchargealliance.org/protocols/open-smart-charging-protocol/">Open Smart Charging Protocol</a>
+</aside>
+
 
 # ELMO OSCP 測試環境
 
